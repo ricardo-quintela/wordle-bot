@@ -1,3 +1,4 @@
+from tkinter import W
 from letter import Letter
 from math import log2
 
@@ -169,6 +170,10 @@ def main():
         # wordle hints
         wordle_output = validation_string()
 
+        # sometimes the word gets repeated
+        if wordle_output != "ggggg":
+            words.remove(attempt)
+
         # add the letters to the data structures
         for i in range(5):
 
@@ -226,6 +231,7 @@ def main():
         # !bug in the first word
         if words[0][0] != attempt[0] and wordle_output[0] == "g":
             words.pop(0)
+
 
         # Next attempt
         attempt = best_word(words, count_letters(words), total_letters(words))
